@@ -4,6 +4,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+import static java.lang.Thread.sleep;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,5 +39,21 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void shakeSnake(View v) {
+        ImageView iv = (ImageView) findViewById(R.id.imgSnake1);
+        iv.setAlpha(20);
+        iv.getDrawable().invalidateSelf();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        iv.setAlpha(255);
+        iv.getDrawable().invalidateSelf();
     }
 }
