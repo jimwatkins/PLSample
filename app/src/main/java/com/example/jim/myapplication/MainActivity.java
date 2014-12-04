@@ -1,5 +1,6 @@
 package com.example.jim.myapplication;
 
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,14 +46,10 @@ public class MainActivity extends ActionBarActivity {
         ImageView iv = (ImageView) findViewById(R.id.imgSnake1);
         iv.setAlpha(20);
         iv.getDrawable().invalidateSelf();
+    }
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
+    public void restoreSnake(View v) {
+        ImageView iv = (ImageView) findViewById(R.id.imgSnake1);
         iv.setAlpha(255);
         iv.getDrawable().invalidateSelf();
     }
