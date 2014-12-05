@@ -43,17 +43,21 @@ public class MainActivity extends ActionBarActivity {
     };
 
     private void shakeImage(View v) {
-        for (int i=0;i<100;i++) {
-            v.setLeft(v.getLeft()-10);
-            v.setTop(v.getTop()-10);
-            v.invalidate();
-            v.setLeft(v.getLeft()+20);
-            v.setTop(v.getTop()+20);
-            v.invalidate();
-            v.setLeft(v.getLeft()-10);
-            v.setTop(v.getTop()-10);
-            v.invalidate();
+        for (int i=0;i<=360;i=i+45) {
+            v.animate().rotation(i);
         }
+
+//        for (int i=0;i<100;i++) {
+//            v.setLeft(v.getLeft()-10);
+//            v.setTop(v.getTop()-10);
+//            v.invalidate();
+//            v.setLeft(v.getLeft()+20);
+//            v.setTop(v.getTop()+20);
+//            v.invalidate();
+//            v.setLeft(v.getLeft()-10);
+//            v.setTop(v.getTop()-10);
+//            v.invalidate();
+//        }
     }
 
     private void toggleAlpha(View v) {
