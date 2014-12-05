@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,10 +14,53 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends ActionBarActivity {
 
+    ImageView imgSnake1, imgSnake2, imgSnake3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imgSnake1 = (ImageView) findViewById(R.id.imgSnake1);
+        imgSnake2 = (ImageView) findViewById(R.id.imgSnake2);
+        imgSnake3 = (ImageView) findViewById(R.id.imgSnake3);
+
+        imgSnake2.setOnTouchListener(mSnakeTouchListener);
+        imgSnake3.setOnTouchListener(mSnakeTouchListener);
+
+    }
+
+    View.OnTouchListener mSnakeTouchListener = new View.OnTouchListener()  {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (v.getId() == R.id.imgSnake2)
+                toggleAlpha(v);
+            else
+                shakeImage(v);
+
+            return false;
+        }
+    };
+
+    private void shakeImage(View v) {
+        for (int i=0;i<100;i++) {
+            v.setLeft(v.getLeft()-10);
+            v.setTop(v.getTop()-10);
+            v.invalidate();
+            v.setLeft(v.getLeft()+20);
+            v.setTop(v.getTop()+20);
+            v.invalidate();
+            v.setLeft(v.getLeft()-10);
+            v.setTop(v.getTop()-10);
+            v.invalidate();
+        }
+    }
+
+    private void toggleAlpha(View v) {
+        if (v.getAlpha() == .5)
+            v.setAlpha((float) 1);
+        else
+            v.setAlpha((float) .5);
     }
 
 
@@ -43,14 +87,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void shakeSnake(View v) {
-        ImageView iv = (ImageView) findViewById(R.id.imgSnake1);
-        iv.setAlpha(20);
-        iv.getDrawable().invalidateSelf();
+        imgSnake1.setAlpha(20);
+        imgSnake1.getDrawable().invalidateSelf();
     }
 
     public void restoreSnake(View v) {
-        ImageView iv = (ImageView) findViewById(R.id.imgSnake1);
-        iv.setAlpha(255);
-        iv.getDrawable().invalidateSelf();
+        imgSnake1.setAlpha(255);
+        imgSnake1.getDrawable().invalidateSelf();
     }
 }
