@@ -80,6 +80,17 @@
             android:layout_below="@+id/txtSnake3"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDegrees"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="false"
+            android:layout_centerHorizontal="true"
+            android:inputType="number|numberDecimal|numberSigned"
+            android:text="45"
+            android:gravity="center_horizontal" />
     </RelativeLayout>
 
     <Button

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import static java.lang.Thread.sleep;
@@ -15,6 +16,7 @@ import static java.lang.Thread.sleep;
 public class MainActivity extends ActionBarActivity {
 
     ImageView imgSnake1, imgSnake2, imgSnake3;
+    EditText txtDegrees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
         imgSnake1 = (ImageView) findViewById(R.id.imgSnake1);
         imgSnake2 = (ImageView) findViewById(R.id.imgSnake2);
         imgSnake3 = (ImageView) findViewById(R.id.imgSnake3);
+        txtDegrees = (EditText) findViewById(R.id.txtDegrees);
 
         imgSnake2.setOnTouchListener(mSnakeTouchListener);
         imgSnake3.setOnTouchListener(mSnakeTouchListener);
@@ -38,29 +41,17 @@ public class MainActivity extends ActionBarActivity {
             else
                 shakeImage(v);
 
-            return false;
+            return true;
         }
     };
 
     private void shakeImage(View v) {
-        for (int i=0;i<=360;i=i+45) {
-            v.animate().rotation(i);
-        }
-
-//        for (int i=0;i<100;i++) {
-//            v.setLeft(v.getLeft()-10);
-//            v.setTop(v.getTop()-10);
-//            v.invalidate();
-//            v.setLeft(v.getLeft()+20);
-//            v.setTop(v.getTop()+20);
-//            v.invalidate();
-//            v.setLeft(v.getLeft()-10);
-//            v.setTop(v.getTop()-10);
-//            v.invalidate();
-//        }
+        float d = Float.parseFloat(txtDegrees.getText().toString());
+        v.animate().setDuration(1000).rotationBy(d);
     }
 
     private void toggleAlpha(View v) {
+
         if (v.getAlpha() == .5)
             v.setAlpha((float) 1);
         else
@@ -98,5 +89,7 @@ public class MainActivity extends ActionBarActivity {
     public void restoreSnake(View v) {
         imgSnake1.setAlpha(255);
         imgSnake1.getDrawable().invalidateSelf();
+        imgSnake2.setAlpha(255);
+        imgSnake3.animate().rotation(0);
     }
 }
